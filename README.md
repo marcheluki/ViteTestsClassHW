@@ -1,54 +1,150 @@
-# React + TypeScript + Vite
+# jest_test
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates several testing techniques using Jest, including:
+- Testing React components using both ReactDOM's `createRoot` API and React Testing Library.
+- Testing snapshot output.
+- Using mock functions and spies.
+- Testing utility functions with module mocks.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Overview](#overview)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Tests](#running-the-tests)
+- [Test Details](#test-details)
+- [Configuration](#configuration)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This project provides examples for:
+- **ReactDOM Testing:** Rendering a simple `Counter` component (which increments and decrements a count) using ReactDOM's `createRoot` API and testing its behavior.
+- **React Testing Library:** Refactoring the `Counter` test so that it mimics real user interactions, and uses more specific assertions (such as `toHaveTextContent` and `toBeInTheDocument`).
+- **Snapshot Testing:** Testing a set of superhero data and output using Jest snapshots.
+- **Mock Functions and Spies:** Using `jest.fn()` and `jest.spyOn()` to test functions that transform data (e.g., forEach implementations and utility functions).
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Structure
+
+Below is a simplified view of the project folder structure:
+
+```
+vite-project/
+├── src/
+│   ├── exercise/
+│   │   ├── 00-MockFunctions/
+│   │   │   ├── forEachFn.test.ts
+│   │   │   └── forEachSpyOn.test.ts
+│   │   ├── 01-MockModule/
+│   │   │   └── mockModule.test.ts
+│   │   ├── 02-Snapshots/
+│   │   │   ├── SuperHeros/
+│   │   │   │   ├── SuperHeros.test.ts
+│   │   │   │   └── __snapshots__/SuperHeros.test.ts.snap
+│   │   │   └── Snapshots-Explanation.test.ts
+│   │   ├── 03-ReactDom/
+│   │   │   ├── Counter.tsx
+│   │   │   └── ReactDom.test.tsx
+│   │   └── 04-ReactTestingLibrary/
+│   │       └── Counter.test.tsx
+├── jest.config.cjs
+├── jest.setup.ts
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+└── tsconfig.node.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Prerequisites
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- [Node.js](https://nodejs.org/) (v14+ recommended)
+- npm (comes with Node.js)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Installation
+
+1. Clone the repository or download the project files.
+2. Navigate to the project directory in your terminal.
+3. Run the following command to install all dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## Running the Tests
+
+To run all tests in watch mode:
+
+```bash
+npm test
 ```
+
+To generate a coverage report:
+
+```bash
+npm run test:coverage
+```
+
+You can also run tests in watch mode with:
+
+```bash
+npm run test:watch
+```
+
+## Test Details
+
+### ReactDOM Testing (Exercise 03)
+
+- **File:** `src/exercise/03-ReactDom/ReactDom.test.tsx`  
+- **Component Under Test:** `src/exercise/03-ReactDom/Counter.tsx`  
+- **What it Tests:**
+  - Rendering of the `Counter` component.
+  - Presence of two buttons (Increment and Decrement).
+  - Functionality: clicking on the buttons updates the count displayed in the `h1`.
+
+### React Testing Library (Exercise 04)
+
+- **File:** `src/exercise/04-ReactTestingLibrary/Counter.test.tsx`  
+- **What it Tests:**
+  - Rendering the `Counter` component in a way that simulates a real user experience.
+  - Uses queries like `getByRole` and assertions such as `toHaveTextContent`.
+  - Simulates button clicks via `fireEvent.click`.
+
+### Snapshot Testing (Exercise 02)
+
+- **File:** `src/exercise/02-Snapshots/SuperHeros/SuperHeros.test.ts`  
+- **What it Tests:**
+  - Ensures that the output of the `getFlyingSuperHeros` function matches the saved snapshot.
+  - Includes tests that verify behavior when no superhero has the "Fly" power and when filtering is applied.
+
+### Mock Functions and Module Testing (Exercises 00 & 01)
+
+- **Files:**  
+  - `src/exercise/00-MockFunctions/forEachFn.test.ts`
+  - `src/exercise/00-MockFunctions/forEachSpyOn.test.ts`
+  - `src/exercise/01-MockModule/mockModule.test.ts`  
+- **What they Test:**
+  - Use of `jest.fn()` to create mock functions.
+  - Use of `jest.spyOn()` for tracking function calls and return values.
+  - Verifying that functions are called with the correct arguments and return correct results after transformations.
+
+## Configuration
+
+### Jest Configuration
+
+- **File:** `jest.config.cjs`  
+- Uses `ts-jest` transformer to enable TypeScript tests.
+- Specifies the test environment as `jest-environment-jsdom`.
+- Sets up coverage collection and thresholds.
+- Loads additional setup via `jest.setup.ts`.
+
+### TypeScript Configuration
+
+- The project uses multiple `tsconfig` files:
+  - **`tsconfig.json`** – References `tsconfig.app.json` and `tsconfig.node.json`.
+  - **`tsconfig.app.json`** – Contains settings for React code (including JSX support via `"jsx": "react-jsx"` and module interop via `"esModuleInterop": true`).
+  - **`tsconfig.node.json`** – Contains settings for Node-specific code and tests.
+
+## License
+
+This project is licensed under the ISC License.
