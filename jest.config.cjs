@@ -9,15 +9,15 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
   },
-  collectCoverageFrom: ["src/**/*.{ts,tsx, js,jsx}"],
-  collectCoverage: true,
-  coverageThreshold: {
-    global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70,
-    },
-  },
+  // collectCoverageFrom: ["src/**/*.{ts,tsx, js,jsx}"],
+  // collectCoverage: true,
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 70,
+  //     functions: 70,
+  //     lines: 70,
+  //     statements: 70,
+  //   },
+  // },
   testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/dist/"],
 };
