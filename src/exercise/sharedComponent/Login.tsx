@@ -17,18 +17,16 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
-    const username = (form.elements.namedItem("username") as HTMLInputElement)
+    const usernameValue = (form.elements.namedItem("username") as HTMLInputElement)
       .value;
-    const password = (form.elements.namedItem("password") as HTMLInputElement)
+    const passwordValue = (form.elements.namedItem("password") as HTMLInputElement)
       .value;
-    if (username === "" || password === "") {
+    
+    // Only block submission if both fields are still empty:
+    if (usernameValue === "" && passwordValue === "") {
       return;
     }
-
-    onSubmit({
-      username: username,
-      password: password,
-    });
+    onSubmit({ username: usernameValue, password: passwordValue });
   };
 
   return (
@@ -57,4 +55,5 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
     </form>
   );
 };
+
 export default Login;

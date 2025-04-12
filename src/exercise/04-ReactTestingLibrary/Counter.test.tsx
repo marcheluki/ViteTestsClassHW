@@ -41,7 +41,7 @@ Testing Library does for us. The emoji should guide you pretty well on this one
 so I'll let you have at it!
 
 */
-
+import React from 'react';
 import { render, fireEvent, screen } from "@testing-library/react";
 import Counter from "../03-ReactDom/Counter"; // adjust the path as needed
 

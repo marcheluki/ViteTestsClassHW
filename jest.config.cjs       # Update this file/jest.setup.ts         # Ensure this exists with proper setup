@@ -1,0 +1,7 @@
+module.exports = {
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+  testEnvironment: 'node',
+  // other configurations can be added here
+};
+
+export {};

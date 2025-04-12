@@ -1,6 +1,6 @@
 # jest_test
 
-![](./ProofOfTestsWorking/PassedTests.png)
+![](./ProofOfTestsWorking/testworking.png)
 
 This project demonstrates several testing techniques using Jest, including:
 - Testing React components using both ReactDOM's `createRoot` API and React Testing Library.

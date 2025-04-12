@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginSubmission handles missing password 1`] = `
+<div
+  role="alert"
+  style="color: red;"
+>
+  Password is required
+</div>
+`;
+
+exports[`LoginSubmission handles server error 1`] = `
+<div
+  role="alert"
+  style="color: red;"
+>
+  Internal server error
+</div>
+`;
